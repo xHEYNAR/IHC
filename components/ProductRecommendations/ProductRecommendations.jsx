@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import "./ProductRecommendations.css";
 
 const products = [
@@ -205,7 +206,9 @@ export default function ProductRecommendations() {
 
                     <div className="product-buttons">
                       <button className="btn-primary">Ver detalle</button>
-                      <button className="btn-secondary">Comprar</button>
+                      <Link href="/vistaComprar">
+                        <button className="btn-secondary">Comprar</button>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -34,7 +34,7 @@ export default function VistaPagar() {
       setChecking(false);
       setPaid(true);
       setModalOpen(true); // ← abrimos el modal al finalizar
-    }, 2000);
+    }, 5000);
   };
 
   return (

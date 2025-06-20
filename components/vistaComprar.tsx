@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import "/styles/vistaComprar.css";
@@ -104,7 +105,9 @@ export default function VistaComprar() {
 
           <div className="vc-buttons">
             <Button className="vc-btn">Agregar al carrito</Button>
-            <Button className="vc-btn-buy-now">Comprar ahora</Button>
+            <Link href="/vistaPagar" passHref>
+              <Button className="vc-btn-buy-now">Comprar ahora</Button>
+            </Link>
           </div>
 
           <table className="vc-details">
