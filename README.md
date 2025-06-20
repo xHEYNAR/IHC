@@ -1,9 +1,5 @@
 # IHC
 
-> **IHC** es una aplicación web de interfaz interactiva para la edición y visualización de preguntas secuenciales, construida con React y Next.js.
-
----
-
 ## 🚀 Tecnologías y herramientas
 
 - **React**  
