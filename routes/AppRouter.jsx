@@ -6,8 +6,8 @@ import SimulatorPage from "../pages/simulador/page";
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/simulador" element={<SimulatorPage/>} />
+      <Route path="/" element={<Home />} />
+      <Route path="/simulador" element={<SimulatorPage />} />
     </Routes>
   );
 };

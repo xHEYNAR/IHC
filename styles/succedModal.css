@@ -1,0 +1,49 @@
+.success-modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.success-modal__content {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.success-modal__icon svg {
+  width: 3rem;
+  height: 3rem;
+  color: #248a98; /* o tu lila */
+  margin-bottom: 1rem;
+}
+.success-modal__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+.success-modal__message,
+.success-modal__details p {
+  color: #374151;
+  margin-bottom: 1rem;
+}
+.success-modal__button {
+  background: #712581;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.success-modal__button:hover {
+  background: #591b65;
+}
