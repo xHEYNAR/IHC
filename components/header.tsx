@@ -18,7 +18,7 @@ export default function Header() {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center group">
               <div className="w-8 h-8 bg-gradient-to-r from-[#712581] to-[#8B2F9B] rounded-full flex items-center justify-center mr-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-                <span className="text-white text-sm font-bold">T</span>
+                <img src="/logoP.png" alt="Logo"className="w-6 h-6 object-contain"/>
               </div>
               <span className="text-xl font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#712581]">
                 TecnoLink
