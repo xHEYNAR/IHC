@@ -1,14 +1,16 @@
 .hero {
   background: linear-gradient(135deg, #712581 0%, #712581 50%, #8b2f9b 100%);
-  padding: 6rem 0;
+  padding: 4rem 0;
   position: relative;
   overflow: hidden;
 }
 
 .hero-container {
-  max-width: 1280px;
+
+  max-width: 1270px;
   margin: 0 auto;
   padding: 0 1rem;
+  margin-top: 3rem;
 }
 
 .hero-content {
@@ -111,6 +113,7 @@
   border-radius: 1.5rem;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-left: 1rem;
 }
 
 .hero-card-inner {
@@ -210,7 +213,7 @@
 
 .floating-element-2 {
   bottom: -1rem;
-  left: -1rem;
+  left: -0.4rem !important;
   width: 3rem;
   height: 3rem;
   background-color: white;

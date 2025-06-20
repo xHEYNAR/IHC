@@ -1,6 +1,7 @@
 .products-section {
   padding: 2rem 0;
-  background-color: #f2f2f2;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb; /* línea tenue inferior */
 }
 
 .products-container {
@@ -105,6 +106,9 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 
 .product-image {
@@ -123,6 +127,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: white;
+  
 }
 
 .badge-blue {
@@ -200,7 +205,7 @@
   border: 1px solid #d1d5db;
 }
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: #be2c12b6;
 }
 
 .btn-secondary {
