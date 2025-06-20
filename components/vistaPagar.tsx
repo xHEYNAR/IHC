@@ -1,6 +1,6 @@
 // components/vistaPagar.tsx
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { CreditCard, Banknote, QrCode } from "lucide-react";
@@ -9,6 +9,7 @@ import SuccedModal from "./succedModal"; // ajusta la ruta si hace falta
 import "/styles/vistaPagar.css";
 
 export default function VistaPagar() {
+  const router = useRouter();
   const [method, setMethod] = useState<"card" | "deposit" | "qr">("card");
   const [checking, setChecking] = useState(false);
   const [paid, setPaid] = useState(false);
@@ -35,6 +36,11 @@ export default function VistaPagar() {
       setPaid(true);
       setModalOpen(true); // ← abrimos el modal al finalizar
     }, 5000);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    router.push("/"); // ③ redirige al home
   };
 
   return (
@@ -228,7 +234,7 @@ export default function VistaPagar() {
       </section>
       <SuccedModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={handleCloseModal}
         title="¡Pago exitoso!"
         description="Se verificó el pago correctamente."
       />
