@@ -1,4 +1,5 @@
-import "./CustomerReviews.css"
+import Link from "next/link";
+import "./CustomerReviews.css";
 
 const reviews = [
   {
@@ -34,7 +35,7 @@ const reviews = [
     avatar: "👨‍💻",
     bgColor: "bg-green",
   },
-]
+];
 
 export default function CustomerReviews() {
   return (
@@ -47,7 +48,9 @@ export default function CustomerReviews() {
       <div className="reviews-container">
         <div className="reviews-header">
           <h2 className="reviews-title">Reseñas de Compradores</h2>
-          <p className="reviews-subtitle">Descubre lo que dicen nuestros usuarios sobre sus equipos</p>
+          <p className="reviews-subtitle">
+            Descubre lo que dicen nuestros usuarios sobre sus equipos
+          </p>
         </div>
 
         <div className="reviews-grid">
@@ -57,7 +60,11 @@ export default function CustomerReviews() {
                 <div className="review-avatar">
                   <span className="avatar-emoji">{review.avatar}</span>
                 </div>
-                <svg className="quote-icon" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="quote-icon"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                 </svg>
               </div>
@@ -73,7 +80,12 @@ export default function CustomerReviews() {
                 <div className="review-actions">
                   <div className="review-stats">
                     <div className="stat-item stat-likes">
-                      <svg className="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="stat-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -84,7 +96,12 @@ export default function CustomerReviews() {
                       <span className="stat-number">{review.likes}</span>
                     </div>
                     <div className="stat-item">
-                      <svg className="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="stat-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -102,9 +119,11 @@ export default function CustomerReviews() {
         </div>
 
         <div className="reviews-cta">
-          <button className="reviews-btn">Ver todas las reseñas</button>
+          <Link href="/resenas">
+            <button className="reviews-btn">Ver todas las reseñas</button>
+          </Link>
         </div>
       </div>
     </section>
-  )
+  );
 }

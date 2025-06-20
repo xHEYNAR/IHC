@@ -1,4 +1,6 @@
-import "./VirtualAssistant.css"
+import Link from "next/link";
+
+import "./VirtualAssistant.css";
 
 export default function VirtualAssistant() {
   return (
@@ -15,12 +17,16 @@ export default function VirtualAssistant() {
           <div className="assistant-text">
             <h2 className="assistant-title">¿No sabes por dónde empezar?</h2>
             <p className="assistant-description">
-              Nuestro asistente virtual te guiará paso a paso para encontrar el equipo perfecto según tu carrera y
-              necesidades.
+              Nuestro asistente virtual te guiará paso a paso para encontrar el
+              equipo perfecto según tu carrera y necesidades.
             </p>
             <div className="assistant-buttons">
-              <button className="btn-primary">Hablar con el asistente</button>
-              <button className="btn-secondary">Ver demo</button>
+              <Link href="/asistente">
+                <button className="btn-primary">Hablar con el asistente</button>
+              </Link>
+              <Link href="/demo">
+                <button className="btn-secondary">Ver demo</button>
+              </Link>
             </div>
           </div>
 
@@ -42,19 +48,25 @@ export default function VirtualAssistant() {
 
                 <div className="chat-messages">
                   <div className="message message-bot">
-                    <p className="message-text">¡Hola! ¿Qué carrera estudias?</p>
+                    <p className="message-text">
+                      ¡Hola! ¿Qué carrera estudias?
+                    </p>
                   </div>
                   <div className="message message-user">
                     <p className="message-text">Arquitectura</p>
                   </div>
                   <div className="message message-bot">
-                    <p className="message-text">Perfecto! Te recomiendo equipos con...</p>
+                    <p className="message-text">
+                      Perfecto! Te recomiendo equipos con...
+                    </p>
                   </div>
                 </div>
 
                 <div className="chat-input">
                   <div className="input-field">
-                    <span className="input-placeholder">Escribe tu mensaje...</span>
+                    <span className="input-placeholder">
+                      Escribe tu mensaje...
+                    </span>
                   </div>
                   <div className="send-button">
                     <span>→</span>
@@ -69,5 +81,5 @@ export default function VirtualAssistant() {
         </div>
       </div>
     </section>
-  )
+  );
 }
