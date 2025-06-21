@@ -456,13 +456,23 @@ export default function SearchPageContent() {
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCareer, setSelectedCareer] = useState("Todas las carreras");
+  const [showResults, setShowResults] = useState(true); // siempre mostramos la sección de productos
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [clickedSuggestions, setClickedSuggestions] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
 
+  // función que dispara el filtrado
+  const handleSearch = () => {
+    filterProducts(selectedCategory, selectedCareer, searchQuery);
+    // opcional: hacer scroll suave a los resultados
+    document
+      .getElementById("searchResults")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
   // Filter products based on selected category
   const filterProducts = (category: string, career: string, query: string) => {
     let filtered = allProducts;
@@ -529,8 +539,6 @@ export default function SearchPageContent() {
     } else {
       setSuggestions([]);
     }
-
-    filterProducts(selectedCategory, selectedCareer, query);
   };
 
   const displayedProducts = showAll
@@ -566,8 +574,8 @@ export default function SearchPageContent() {
             <div className="bg-white rounded-2xl p-6 shadow-2xl">
               <div className="flex flex-col lg:flex-row gap-4 mb-6">
                 {/* Search Input */}
-                <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <div className="flex-1 relative flex items-center gap-2">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
                     placeholder="Buscar productos..."
@@ -575,40 +583,84 @@ export default function SearchPageContent() {
                     onChange={(e) => handleSearchChange(e.target.value)}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
-                    className="w-full pl-12 pr-4 py-4 text-lg border-0 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#712581] bg-gray-50"
+                    onKeyDown={(e) => {
+                      switch (e.key) {
+                        case "ArrowDown":
+                          e.preventDefault();
+                          setHighlightedIndex((idx) =>
+                            Math.min(idx + 1, suggestions.length - 1)
+                          );
+                          break;
+                        case "ArrowUp":
+                          e.preventDefault();
+                          setHighlightedIndex((idx) => Math.max(idx - 1, 0));
+                          break;
+                        case "Enter":
+                          e.preventDefault();
+                          if (highlightedIndex >= 0) {
+                            // si hay una sugerencia seleccionada, la "clickeamos"
+                            const choice = suggestions[highlightedIndex];
+                            setSearchQuery(choice);
+                            setSuggestions([]);
+                            filterProducts(
+                              selectedCategory,
+                              selectedCareer,
+                              choice
+                            );
+                            document
+                              .getElementById("searchResults")
+                              ?.scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            // si no, buscamos con lo que hay en el input
+                            handleSearch();
+                          }
+                          setHighlightedIndex(-1);
+                          (e.target as HTMLInputElement).blur();
+                          setIsFocused(false);
+                          break;
+                        default:
+                          return;
+                      }
+                    }}
+                    className="flex-1 pl-12 pr-4 py-4 text-lg rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-[#712581] bg-gray-50"
                   />
+                  <Button
+                    onClick={handleSearch}
+                    className="px-6 py-3 bg-[#712581] hover:bg-[#712581]/90 text-white rounded-xl font-semibold"
+                  >
+                    Buscar
+                  </Button>
+
                   {isFocused && (
-                    <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded-xl mt-1 shadow-lg">
-                      {(searchQuery ? suggestions : clickedSuggestions).map(
-                        (s, i) => (
-                          <li
-                            key={i}
-                            onMouseDown={() => {
-                              // usar onMouseDown para que no pierda el foco antes de onClick
-                              setSearchQuery(s);
-                              setSuggestions([]);
-                              filterProducts(
-                                selectedCategory,
-                                selectedCareer,
-                                s
-                              );
-                              if (!clickedSuggestions.includes(s)) {
-                                setClickedSuggestions([
-                                  ...clickedSuggestions,
-                                  s,
-                                ]);
-                              }
-                            }}
-                            className={`px-4 py-2 cursor-pointer ${
+                    <ul className="absolute z-10 top-full left-0 w-full bg-white border border-gray-200 rounded-xl mt-1 shadow-lg">
+                      {suggestions.map((s, i) => (
+                        <li
+                          key={i}
+                          onMouseDown={() => {
+                            setSearchQuery(s);
+                            setSuggestions([]);
+                            if (!clickedSuggestions.includes(s)) {
+                              setClickedSuggestions([...clickedSuggestions, s]);
+                            }
+                            filterProducts(selectedCategory, selectedCareer, s);
+                            document
+                              .getElementById("searchResults")
+                              ?.scrollIntoView({ behavior: "smooth" });
+                            setIsFocused(false);
+                          }}
+                          className={`
+                            px-4 py-2 cursor-pointer 
+                            ${i === highlightedIndex ? "bg-gray-100" : ""} 
+                            ${
                               clickedSuggestions.includes(s)
                                 ? "text-[#712581]"
-                                : "hover:bg-gray-100"
-                            }`}
-                          >
-                            {s}
-                          </li>
-                        )
-                      )}
+                                : ""
+                            }
+                          `}
+                        >
+                          {s}
+                        </li>
+                      ))}
                     </ul>
                   )}
                 </div>
@@ -667,192 +719,197 @@ export default function SearchPageContent() {
       </section>
 
       {/* Results Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
-          {/* Results Header */}
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 bg-gradient-to-r from-[#248a98] to-[#2DD4BF] rounded-full flex items-center justify-center shadow-lg">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900">
-                Resultados de la búsqueda
-              </h2>
-              <p className="text-lg text-gray-600">
-                Hemos encontrado{" "}
-                <span className="font-semibold text-[#712581]">
-                  {filteredProducts.length}
-                </span>{" "}
-                equipos según tu selección.
-              </p>
-            </div>
-          </div>
-          {/* Products Grid */}
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedProducts.map((product) => (
-                <Card
-                  key={product.id}
-                  className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-2xl overflow-hidden"
+      <section
+        id="searchResults"
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+            {/* Results Header */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#248a98] to-[#2DD4BF] rounded-full flex items-center justify-center shadow-lg">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
                 >
-                  <CardContent className="p-0">
-                    {/* Product Image */}
-                    <div className="h-48 relative overflow-hidden rounded-t-2xl">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
-                      {product.badge && (
-                        <Badge className="absolute top-3 left-3 bg-[#248a98] text-white border-0 px-3 py-1 rounded-full font-semibold">
-                          {product.badge}
-                        </Badge>
-                      )}
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-bold text-gray-900">
-                          {product.name}
-                        </h3>
-                        <Badge className="bg-[#712581]/10 text-[#712581] hover:bg-[#712581]/20 border-0 px-3 py-1 rounded-full font-semibold">
-                          {product.category}
-                        </Badge>
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">
+                  Resultados de la búsqueda
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Hemos encontrado{" "}
+                  <span className="font-semibold text-[#712581]">
+                    {filteredProducts.length}
+                  </span>{" "}
+                  equipos según tu selección.
+                </p>
+              </div>
+            </div>
+            {/* Products Grid */}
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {displayedProducts.map((product) => (
+                  <Card
+                    key={product.id}
+                    className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 rounded-2xl overflow-hidden"
+                  >
+                    <CardContent className="p-0">
+                      {/* Product Image */}
+                      <div className="h-48 relative overflow-hidden rounded-t-2xl">
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
+                        {product.badge && (
+                          <Badge className="absolute top-3 left-3 bg-[#248a98] text-white border-0 px-3 py-1 rounded-full font-semibold">
+                            {product.badge}
+                          </Badge>
+                        )}
                       </div>
 
-                      {/* Rating */}
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-4 w-4 ${
-                                i < product.rating
-                                  ? "text-yellow-400 fill-current"
-                                  : "text-gray-300"
-                              }`}
-                            />
-                          ))}
+                      {/* Product Info */}
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <h3 className="text-xl font-bold text-gray-900">
+                            {product.name}
+                          </h3>
+                          <Badge className="bg-[#712581]/10 text-[#712581] hover:bg-[#712581]/20 border-0 px-3 py-1 rounded-full font-semibold">
+                            {product.category}
+                          </Badge>
                         </div>
-                        <span className="text-sm text-gray-600 font-medium">
-                          ({product.reviews} reseñas)
-                        </span>
-                      </div>
 
-                      {/* Specifications */}
-                      <div className="space-y-3 mb-6">
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div className="bg-gray-50 p-3 rounded-lg">
-                            <span className="text-gray-500 text-xs">
-                              Procesador
-                            </span>
-                            <p className="font-semibold text-gray-900">
-                              {product.processor}
-                            </p>
+                        {/* Rating */}
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${
+                                  i < product.rating
+                                    ? "text-yellow-400 fill-current"
+                                    : "text-gray-300"
+                                }`}
+                              />
+                            ))}
                           </div>
-                          <div className="bg-gray-50 p-3 rounded-lg">
-                            <span className="text-gray-500 text-xs">RAM</span>
-                            <p className="font-semibold text-gray-900">
-                              {product.ram}
-                            </p>
-                          </div>
-                          <div className="bg-gray-50 p-3 rounded-lg">
-                            <span className="text-gray-500 text-xs">
-                              Almacenamiento
-                            </span>
-                            <p className="font-semibold text-gray-900">
-                              {product.storage}
-                            </p>
-                          </div>
-                          <div className="bg-gray-50 p-3 rounded-lg">
-                            <span className="text-gray-500 text-xs">GPU</span>
-                            <p className="font-semibold text-gray-900">
-                              {product.gpu}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Price and Button */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-col">
-                          <span className="text-3xl font-bold text-[#712581]">
-                            ${product.price}
+                          <span className="text-sm text-gray-600 font-medium">
+                            ({product.reviews} reseñas)
                           </span>
-                          {product.originalPrice && (
-                            <span className="text-sm text-gray-500 line-through">
-                              ${product.originalPrice}
-                            </span>
-                          )}
                         </div>
-                        <Button className="bg-[#712581] hover:bg-[#712581]/90 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
-                          Agregar
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                No se encontraron productos
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Intenta ajustar tus filtros o términos de búsqueda
-              </p>
-              <Button
-                onClick={() => {
-                  setSelectedCategory("todos");
-                  setSelectedCareer("Todas las carreras");
-                  setSearchQuery("");
-                  setFilteredProducts(allProducts);
-                }}
-                className="bg-[#712581] hover:bg-[#712581]/90 text-white px-8 py-3 rounded-xl font-semibold"
-              >
-                Limpiar filtros
-              </Button>
-            </div>
-          )}
-          {!showAll && filteredProducts.length > 9 && (
-            <div className="text-center mt-8">
-              <Button
-                variant="outline"
-                onClick={() => setShowAll(true)}
-                className="px-6 py-3"
-              >
-                Ver todos los productos…
-              </Button>
-            </div>
-          )}
 
-          {showAll && filteredProducts.length > 9 && (
-            <div className="text-center mt-4">
-              <Button
-                variant="outline"
-                onClick={() => setShowAll(false)}
-                className="px-6 py-3"
-              >
-                Mostrar menos…
-              </Button>
-            </div>
-          )}
+                        {/* Specifications */}
+                        <div className="space-y-3 mb-6">
+                          <div className="grid grid-cols-2 gap-4 text-sm">
+                            <div className="bg-gray-50 p-3 rounded-lg">
+                              <span className="text-gray-500 text-xs">
+                                Procesador
+                              </span>
+                              <p className="font-semibold text-gray-900">
+                                {product.processor}
+                              </p>
+                            </div>
+                            <div className="bg-gray-50 p-3 rounded-lg">
+                              <span className="text-gray-500 text-xs">RAM</span>
+                              <p className="font-semibold text-gray-900">
+                                {product.ram}
+                              </p>
+                            </div>
+                            <div className="bg-gray-50 p-3 rounded-lg">
+                              <span className="text-gray-500 text-xs">
+                                Almacenamiento
+                              </span>
+                              <p className="font-semibold text-gray-900">
+                                {product.storage}
+                              </p>
+                            </div>
+                            <div className="bg-gray-50 p-3 rounded-lg">
+                              <span className="text-gray-500 text-xs">GPU</span>
+                              <p className="font-semibold text-gray-900">
+                                {product.gpu}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Price and Button */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-3xl font-bold text-[#712581]">
+                              ${product.price}
+                            </span>
+                            {product.originalPrice && (
+                              <span className="text-sm text-gray-500 line-through">
+                                ${product.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                          <Button className="bg-[#712581] hover:bg-[#712581]/90 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
+                            Agregar
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  No se encontraron productos
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Intenta ajustar tus filtros o términos de búsqueda
+                </p>
+                <Button
+                  onClick={() => {
+                    setSelectedCategory("todos");
+                    setSelectedCareer("Todas las carreras");
+                    setSearchQuery("");
+                    setFilteredProducts(allProducts);
+                  }}
+                  className="bg-[#712581] hover:bg-[#712581]/90 text-white px-8 py-3 rounded-xl font-semibold"
+                >
+                  Limpiar filtros
+                </Button>
+              </div>
+            )}
+            {!showAll && filteredProducts.length > 9 && (
+              <div className="text-center mt-8">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowAll(true)}
+                  className="px-6 py-3"
+                >
+                  Ver todos los productos…
+                </Button>
+              </div>
+            )}
+
+            {showAll && filteredProducts.length > 9 && (
+              <div className="text-center mt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowAll(false)}
+                  className="px-6 py-3"
+                >
+                  Mostrar menos…
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
