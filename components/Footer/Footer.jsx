@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-brand">
             <div className="footer-logo">
               <div className="logo-icon">
-                <span className="logo-text">T</span>
+                <img src="/logoP.png" alt="Logo" className="logo-image33" />
               </div>
               <span className="brand-name">TecnoLink</span>
             </div>
@@ -21,17 +21,17 @@ export default function Footer() {
             <h3 className="section-title">Herramientas</h3>
             <ul className="section-links">
               <li>
-                <a href="#" className="footer-link">
+                <a href="/buscar" className="footer-link">
                   Filtro por Carrera
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a href="/simulador" className="footer-link">
                   Simulador de Compatibilidad
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a href="/comparador" className="footer-link">
                   Comparador Visual
                 </a>
               </li>
@@ -42,17 +42,17 @@ export default function Footer() {
             <h3 className="section-title">Ayuda</h3>
             <ul className="section-links">
               <li>
-                <a href="#" className="footer-link">
+                <a href="/asistente" className="footer-link">
                   Asistente Virtual
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a href="/resenas" className="footer-link">
                   Reseñas de Estudiantes
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a className="footer-link">
                   Preguntas Frecuentes
                 </a>
               </li>
@@ -63,17 +63,17 @@ export default function Footer() {
             <h3 className="section-title">Legal</h3>
             <ul className="section-links">
               <li>
-                <a href="#" className="footer-link">
+                <a  className="footer-link">
                   Política de Privacidad
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a  className="footer-link">
                   Términos de Uso
                 </a>
               </li>
               <li>
-                <a href="#" className="footer-link">
+                <a className="footer-link">
                   Política de Cookies
                 </a>
               </li>

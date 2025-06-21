@@ -49,7 +49,11 @@ export default function Header() {
     </div>
 
     {/* Menú móvil */}
-    <div className={`mobile-menu ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+    <div
+      className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+        isMenuOpen ? "max-h-96 opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"
+      }`}
+    >
       <nav className="mobile-nav">
         <div className="space-y-2">
           <a href="/" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
