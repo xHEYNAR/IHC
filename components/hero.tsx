@@ -25,7 +25,7 @@ export default function Hero() {
                 variant="outline"
                 className="border-2 border-white text-[#F1F5F9] hover:bg-white hover:text-[#712581] px-8 py-4 text-lg font-semibold rounded-full"
               >
-                Usar asistente virtual
+                Usar asistente virtuallllllllllllll
               </Button>
             </div>
           </div>
