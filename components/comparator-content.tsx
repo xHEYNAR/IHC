@@ -1,18 +1,18 @@
-"use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Slider } from "@/components/ui/slider"
-import { Cpu, HardDrive, Zap, Battery, DollarSign } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+"use client";
+import Image from "next/image";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Slider } from "@/components/ui/slider";
+import { Cpu, HardDrive, Zap, Battery, DollarSign } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categories = [
   { id: "todos", label: "Todos", active: true },
   { id: "laptops", label: "Laptops", active: false },
   { id: "pcs", label: "PCs", active: false },
-]
+];
 
 const allProducts = [
   {
@@ -27,7 +27,7 @@ const allProducts = [
     storage: "512GB SSD",
     gpu: "NVIDIA RTX 3050",
     battery: "8 horas",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/asus_rogstrix_g614jv.png",
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ const allProducts = [
     storage: "1TB SSD",
     gpu: "NVIDIA RTX 4070",
     battery: "N/A",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/A0ZC5EA-ABU_1750x1285.avif",
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ const allProducts = [
     storage: "1TB SSD",
     gpu: "NVIDIA RTX 3060",
     battery: "6 horas",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/macbook.png",
   },
   {
     id: 4,
@@ -69,7 +69,7 @@ const allProducts = [
     storage: "2TB SSD",
     gpu: "NVIDIA RTX 4080",
     battery: "N/A",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/656157382_image-2021x2400.jpg",
   },
   {
     id: 5,
@@ -83,7 +83,7 @@ const allProducts = [
     storage: "256GB SSD",
     gpu: "Intel Iris Xe",
     battery: "10 horas",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/aeroo.webp",
   },
   {
     id: 6,
@@ -97,41 +97,46 @@ const allProducts = [
     storage: "512GB SSD",
     gpu: "AMD Radeon Graphics",
     battery: "N/A",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "/image/1709584922741-768x768.webp",
   },
-]
+];
 
 export default function ComparatorContent() {
-  const [budgetRange, setBudgetRange] = useState([500, 2327])
-  const [activeCategory, setActiveCategory] = useState("todos")
-  const [selectedProducts, setSelectedProducts] = useState<number[]>([])
+  const [budgetRange, setBudgetRange] = useState([500, 2327]);
+  const [activeCategory, setActiveCategory] = useState("todos");
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
 
   // Filtrar productos según presupuesto y categoría
   const getFilteredProducts = () => {
     return allProducts.filter((product) => {
-      const withinBudget = product.price >= budgetRange[0] && product.price <= budgetRange[1]
-      const matchesCategory = activeCategory === "todos" || product.type === activeCategory.slice(0, -1)
-      return withinBudget && matchesCategory
-    })
-  }
+      const withinBudget =
+        product.price >= budgetRange[0] && product.price <= budgetRange[1];
+      const matchesCategory =
+        activeCategory === "todos" ||
+        product.type === activeCategory.slice(0, -1);
+      return withinBudget && matchesCategory;
+    });
+  };
 
-  const filteredProducts = getFilteredProducts()
+  const filteredProducts = getFilteredProducts();
 
   const handleProductSelection = (productId: number) => {
     if (selectedProducts.includes(productId)) {
-      setSelectedProducts(selectedProducts.filter((id) => id !== productId))
+      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
     } else if (selectedProducts.length < 2) {
-      setSelectedProducts([...selectedProducts, productId])
+      setSelectedProducts([...selectedProducts, productId]);
     }
-  }
+  };
 
   const handleBudgetReset = () => {
-    setSelectedProducts([])
-    setBudgetRange([500, 2327])
-    setActiveCategory("todos")
-  }
+    setSelectedProducts([]);
+    setBudgetRange([500, 2327]);
+    setActiveCategory("todos");
+  };
 
-  const selectedProductsData = allProducts.filter((product) => selectedProducts.includes(product.id))
+  const selectedProductsData = allProducts.filter((product) =>
+    selectedProducts.includes(product.id)
+  );
 
   return (
     <div className="bg-[#f2f2f2]">
@@ -213,7 +218,8 @@ export default function ComparatorContent() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-xl text-[#F1F5F9]/90 max-w-4xl mx-auto leading-relaxed"
           >
-            Compara laptops y PCs lado a lado según tu presupuesto y visualiza sus características principales.
+            Compara laptops y PCs lado a lado según tu presupuesto y visualiza
+            sus características principales.
           </motion.p>
         </motion.div>
       </motion.section>
@@ -242,7 +248,8 @@ export default function ComparatorContent() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="text-gray-600 mb-6"
               >
-                El presupuesto máximo para tu PC. Ajusta el slider para ver equipos que se adapten a tus posibilidades.
+                El presupuesto máximo para tu PC. Ajusta el slider para ver
+                equipos que se adapten a tus posibilidades.
               </motion.p>
 
               <motion.div
@@ -289,11 +296,16 @@ export default function ComparatorContent() {
                     transition={{ duration: 0.4 }}
                     className="text-gray-600"
                   >
-                    <span className="font-semibold text-[#712581]">{filteredProducts.length}</span> equipos disponibles
-                    dentro de tu presupuesto
+                    <span className="font-semibold text-[#712581]">
+                      {filteredProducts.length}
+                    </span>{" "}
+                    equipos disponibles dentro de tu presupuesto
                   </motion.p>
 
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       onClick={handleBudgetReset}
                       variant="outline"
@@ -330,7 +342,8 @@ export default function ComparatorContent() {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="text-gray-600 mb-6"
               >
-                Selecciona hasta 2 equipos para comparar sus características lado a lado.
+                Selecciona hasta 2 equipos para comparar sus características
+                lado a lado.
               </motion.p>
 
               {/* Category Tabs */}
@@ -350,7 +363,9 @@ export default function ComparatorContent() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Button
-                      variant={activeCategory === category.id ? "default" : "outline"}
+                      variant={
+                        activeCategory === category.id ? "default" : "outline"
+                      }
                       onClick={() => setActiveCategory(category.id)}
                       className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                         activeCategory === category.id
@@ -380,7 +395,8 @@ export default function ComparatorContent() {
                       transition={{ delay: 0.2 }}
                       className="text-[#712581] font-semibold"
                     >
-                      {selectedProducts.length}/2 equipos seleccionados para comparar
+                      {selectedProducts.length}/2 equipos seleccionados para
+                      comparar
                     </motion.p>
                     {selectedProducts.length === 2 && (
                       <motion.p
@@ -389,7 +405,8 @@ export default function ComparatorContent() {
                         transition={{ delay: 0.3 }}
                         className="text-sm text-gray-600 mt-1"
                       >
-                        ¡Perfecto! Ahora puedes ver la comparación detallada abajo.
+                        ¡Perfecto! Ahora puedes ver la comparación detallada
+                        abajo.
                       </motion.p>
                     )}
                   </motion.div>
@@ -408,7 +425,7 @@ export default function ComparatorContent() {
                     className="grid grid-cols-1 md:grid-cols-2 gap-8"
                   >
                     {filteredProducts.map((product, index) => {
-                      const isSelected = selectedProducts.includes(product.id)
+                      const isSelected = selectedProducts.includes(product.id);
                       return (
                         <motion.div
                           key={product.id}
@@ -427,7 +444,9 @@ export default function ComparatorContent() {
                         >
                           <Card
                             className={`border-2 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden ${
-                              isSelected ? "border-[#712581] bg-[#712581]/5" : "border-gray-200"
+                              isSelected
+                                ? "border-[#712581] bg-[#712581]/5"
+                                : "border-gray-200"
                             }`}
                           >
                             <CardContent className="p-0">
@@ -436,9 +455,14 @@ export default function ComparatorContent() {
                                 <motion.div
                                   whileHover={{ scale: 1.1, rotate: 5 }}
                                   transition={{ duration: 0.3 }}
-                                  className="text-6xl"
+                                  className="relative w-full h-48 bg-white overflow-hidden"
                                 >
-                                  💻
+                                  <Image
+                                    src={product.image}
+                                    alt={product.name}
+                                    fill
+                                    className="object-contain"
+                                  />
                                 </motion.div>
                                 <AnimatePresence>
                                   {isSelected && (
@@ -446,10 +470,15 @@ export default function ComparatorContent() {
                                       initial={{ scale: 0, opacity: 0 }}
                                       animate={{ scale: 1, opacity: 1 }}
                                       exit={{ scale: 0, opacity: 0 }}
-                                      transition={{ duration: 0.3, type: "spring" }}
+                                      transition={{
+                                        duration: 0.3,
+                                        type: "spring",
+                                      }}
                                       className="absolute top-3 right-3 w-8 h-8 bg-[#712581] rounded-full flex items-center justify-center"
                                     >
-                                      <span className="text-white font-bold text-sm">✓</span>
+                                      <span className="text-white font-bold text-sm">
+                                        ✓
+                                      </span>
                                     </motion.div>
                                   )}
                                 </AnimatePresence>
@@ -469,11 +498,16 @@ export default function ComparatorContent() {
                                   <motion.div
                                     initial={{ opacity: 0, scale: 0 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                                    transition={{
+                                      delay: 0.3 + index * 0.1,
+                                      type: "spring",
+                                    }}
                                   >
                                     <Badge
                                       className={`${
-                                        product.category === "PC" ? "bg-[#248a98]" : "bg-[#712581]"
+                                        product.category === "PC"
+                                          ? "bg-[#248a98]"
+                                          : "bg-[#712581]"
                                       } text-white border-0 px-3 py-1 rounded-full font-semibold`}
                                     >
                                       {product.category}
@@ -500,32 +534,48 @@ export default function ComparatorContent() {
                                   <div className="flex items-center justify-between text-sm">
                                     <div className="flex items-center gap-2">
                                       <Cpu className="h-4 w-4 text-gray-500" />
-                                      <span className="text-gray-600">Procesador</span>
+                                      <span className="text-gray-600">
+                                        Procesador
+                                      </span>
                                     </div>
-                                    <span className="font-semibold text-gray-900">{product.processor}</span>
+                                    <span className="font-semibold text-gray-900">
+                                      {product.processor}
+                                    </span>
                                   </div>
                                   <div className="flex items-center justify-between text-sm">
                                     <span className="text-gray-600">RAM</span>
-                                    <span className="font-semibold text-gray-900">{product.ram}</span>
+                                    <span className="font-semibold text-gray-900">
+                                      {product.ram}
+                                    </span>
                                   </div>
                                   <div className="flex items-center justify-between text-sm">
                                     <div className="flex items-center gap-2">
                                       <HardDrive className="h-4 w-4 text-gray-500" />
-                                      <span className="text-gray-600">Almacenamiento</span>
+                                      <span className="text-gray-600">
+                                        Almacenamiento
+                                      </span>
                                     </div>
-                                    <span className="font-semibold text-gray-900">{product.storage}</span>
+                                    <span className="font-semibold text-gray-900">
+                                      {product.storage}
+                                    </span>
                                   </div>
                                   <div className="flex items-center justify-between text-sm">
                                     <span className="text-gray-600">GPU</span>
-                                    <span className="font-semibold text-gray-900">{product.gpu}</span>
+                                    <span className="font-semibold text-gray-900">
+                                      {product.gpu}
+                                    </span>
                                   </div>
                                   {product.battery !== "N/A" && (
                                     <div className="flex items-center justify-between text-sm">
                                       <div className="flex items-center gap-2">
                                         <Battery className="h-4 w-4 text-gray-500" />
-                                        <span className="text-gray-600">Batería</span>
+                                        <span className="text-gray-600">
+                                          Batería
+                                        </span>
                                       </div>
-                                      <span className="font-semibold text-gray-900">{product.battery}</span>
+                                      <span className="font-semibold text-gray-900">
+                                        {product.battery}
+                                      </span>
                                     </div>
                                   )}
                                 </motion.div>
@@ -543,17 +593,27 @@ export default function ComparatorContent() {
                                   >
                                     ${product.price}
                                   </motion.span>
-                                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                  <motion.div
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                  >
                                     <Button
-                                      onClick={() => handleProductSelection(product.id)}
-                                      disabled={selectedProducts.length >= 2 && !isSelected}
+                                      onClick={() =>
+                                        handleProductSelection(product.id)
+                                      }
+                                      disabled={
+                                        selectedProducts.length >= 2 &&
+                                        !isSelected
+                                      }
                                       className={`px-6 py-2 rounded-xl font-semibold transition-all duration-300 ${
                                         isSelected
                                           ? "bg-red-500 hover:bg-red-600 text-white"
                                           : "bg-[#712581] hover:bg-[#712581]/90 text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                       }`}
                                     >
-                                      {isSelected ? "Deseleccionar" : "Seleccionar"}
+                                      {isSelected
+                                        ? "Deseleccionar"
+                                        : "Seleccionar"}
                                     </Button>
                                   </motion.div>
                                 </motion.div>
@@ -561,7 +621,7 @@ export default function ComparatorContent() {
                             </CardContent>
                           </Card>
                         </motion.div>
-                      )
+                      );
                     })}
                   </motion.div>
                 ) : (
@@ -601,7 +661,8 @@ export default function ComparatorContent() {
                       transition={{ delay: 0.3 }}
                       className="text-gray-600"
                     >
-                      No encontramos equipos en tu rango de presupuesto. Intenta ajustar el rango.
+                      No encontramos equipos en tu rango de presupuesto. Intenta
+                      ajustar el rango.
                     </motion.p>
                   </motion.div>
                 )}
@@ -652,9 +713,14 @@ export default function ComparatorContent() {
                         <motion.div
                           whileHover={{ scale: 1.05, rotateY: 10 }}
                           transition={{ duration: 0.3 }}
-                          className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-2xl mb-4"
+                          className="relative h-48 w-full bg-white rounded-2xl mb-4 overflow-hidden"
                         >
-                          <div className="text-6xl">💻</div>
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className="object-contain"
+                          />
                         </motion.div>
                         <motion.h3
                           initial={{ opacity: 0, y: 10 }}
@@ -667,11 +733,16 @@ export default function ComparatorContent() {
                         <motion.div
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.7 + index * 0.1, type: "spring" }}
+                          transition={{
+                            delay: 0.7 + index * 0.1,
+                            type: "spring",
+                          }}
                         >
                           <Badge
                             className={`${
-                              product.category === "PC" ? "bg-[#248a98]" : "bg-[#712581]"
+                              product.category === "PC"
+                                ? "bg-[#248a98]"
+                                : "bg-[#712581]"
                             } text-white border-0 px-3 py-1 rounded-full font-semibold`}
                           >
                             {product.category}
@@ -691,7 +762,11 @@ export default function ComparatorContent() {
                     {[
                       { key: "processor", label: "Procesador", icon: Cpu },
                       { key: "ram", label: "RAM", icon: null },
-                      { key: "storage", label: "Almacenamiento", icon: HardDrive },
+                      {
+                        key: "storage",
+                        label: "Almacenamiento",
+                        icon: HardDrive,
+                      },
                       { key: "gpu", label: "GPU", icon: Zap },
                       { key: "battery", label: "Batería", icon: Battery },
                       { key: "price", label: "Precio", icon: DollarSign },
@@ -713,12 +788,16 @@ export default function ComparatorContent() {
                             key={product.id}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.7 + index * 0.1 + productIndex * 0.05 }}
+                            transition={{
+                              delay: 0.7 + index * 0.1 + productIndex * 0.05,
+                            }}
                             className="text-gray-900 font-semibold"
                           >
                             {spec.key === "price"
                               ? `$${product[spec.key as keyof typeof product]}`
-                              : (product[spec.key as keyof typeof product] as string)}
+                              : (product[
+                                  spec.key as keyof typeof product
+                                ] as string)}
                           </motion.div>
                         ))}
                       </motion.div>
@@ -737,13 +816,19 @@ export default function ComparatorContent() {
                         key={product.id}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.9 + index * 0.1, type: "spring" }}
+                        transition={{
+                          delay: 0.9 + index * 0.1,
+                          type: "spring",
+                        }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Button className="w-full bg-[#712581] hover:bg-[#712581]/90 text-white py-3 rounded-xl font-semibold transition-all duration-300">
+                        <a
+                          href="/vistaComprar"
+                          className="block w-full bg-[#712581] hover:bg-[#712581]/90 text-white py-3 rounded-xl font-semibold transition-all duration-300 text-center"
+                        >
                           Ver detalles
-                        </Button>
+                        </a>
                       </motion.div>
                     ))}
                   </motion.div>
@@ -754,5 +839,5 @@ export default function ComparatorContent() {
         </AnimatePresence>
       </div>
     </div>
-  )
+  );
 }
