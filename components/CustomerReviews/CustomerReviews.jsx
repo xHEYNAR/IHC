@@ -18,7 +18,7 @@ const reviews = [
     name: "Ana García",
     profession: "Diseño Gráfico",
     review:
-      "Perfect para mis proyectos creativos. Adobe Creative Suite funciona sin problemas y la pantalla tiene colores increíbles.",
+      "Perfecto para mis proyectos creativos. Adobe Creative Suite funciona sin problemas y la pantalla tiene colores increíbles.",
     likes: 18,
     comments: 3,
     avatar: "👩‍🎨",
@@ -47,12 +47,9 @@ export default function CustomerReviews() {
 
       <div className="reviews-container">
         <div className="reviews-header">
-          <h2 className="reviews-title">Reseñas de Compradores</h2>
-          <p className="reviews-subtitle">
-            Descubre lo que dicen nuestros usuarios sobre sus equipos
-          </p>
+          <h2 className="reviews-title">Reseñas de <span className="products-title2">Compradores</span></h2>
+          <p className="reviews-subtitle">Descubre lo que dicen nuestros usuarios sobre sus equipos</p>
         </div>
-
         <div className="reviews-grid">
           {reviews.map((review) => (
             <div key={review.id} className="review-card">

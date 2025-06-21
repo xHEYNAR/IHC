@@ -1,8 +1,9 @@
 .reviews-section {
-  padding: 5rem 0;
+  padding: 2rem 0;
   background: white;
   position: relative;
   overflow: hidden;
+ 
 }
 
 .reviews-decorations {
@@ -41,11 +42,12 @@
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;
+
 }
 
 .reviews-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .reviews-title {
@@ -56,8 +58,9 @@
 }
 
 .reviews-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #6b7280;
+  font-weight: 500;
   max-width: 32rem;
   margin: 0 auto;
 }
@@ -65,8 +68,8 @@
 .reviews-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 3rem;
+  margin: 0 1.5rem 3rem 1.5rem;
 }
 
 @media (min-width: 768px) {
@@ -90,7 +93,7 @@
 }
 
 .review-header {
-  height: 6rem;
+  height: 5rem;
   position: relative;
 }
 
@@ -104,6 +107,7 @@
 
 .bg-green {
   background: linear-gradient(90deg, #4ade80 0%, #16a34a 100%);
+
 }
 
 .review-avatar {
@@ -134,7 +138,7 @@
 }
 
 .review-content {
-  padding: 1.5rem;
+  padding: 1rem  1.5rem;
   padding-top: 2rem;
 }
 
@@ -161,7 +165,7 @@
 
 .review-text {
   color: #374151;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.6;
 }
 

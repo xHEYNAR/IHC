@@ -1,83 +1,79 @@
+import "../styles/footerMorado.css";
+
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-[#712581] via-[#712581] to-[#8B2F9B] relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-[#248a98] rounded-full"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2">
-                <span className="text-[#712581] text-sm font-bold">T</span>
+    <footer className="footerM">
+      <div className="footerM-container">
+        <div className="footerM-content">
+          <div className="footerM-brand">
+            <div className="footerM-logo">
+              <div className="logoM-icon">
+                <img src="/logoB.png" alt="Logo" className="logo-imageM" />
               </div>
-              <span className="text-xl font-semibold text-[#F1F5F9]">TecnoLink</span>
+              <span className="brandM-name">TecnoLink</span>
             </div>
-            <p className="text-[#F1F5F9]/80 text-sm leading-relaxed">
+            <p className="brandM-description">
               Ayudamos a estudiantes a encontrar el equipo perfecto para sus estudios.
             </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-[#F1F5F9] mb-4">Herramientas</h3>
-            <ul className="space-y-2 text-sm text-[#F1F5F9]/80">
+          <div className="footerM-section">
+            <h3 className="sectionM-title">Herramientas</h3>
+            <ul className="sectionM-links">
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a href="/buscar" className="footerM-link">
                   Filtro por Carrera
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a href="/simulador" className="footerM-link">
                   Simulador de Compatibilidad
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a href="/comparador" className="footerM-link">
                   Comparador Visual
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-[#F1F5F9] mb-4">Ayuda</h3>
-            <ul className="space-y-2 text-sm text-[#F1F5F9]/80">
+          <div className="footerM-section">
+            <h3 className="sectionM-title">Ayuda</h3>
+            <ul className="sectionM-links">
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a href="/asistente" className="footerM-link">
                   Asistente Virtual
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a href="/resenas" className="footerM-link">
                   Reseñas de Estudiantes
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a className="footerM-link">
                   Preguntas Frecuentes
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-[#F1F5F9] mb-4">Legal</h3>
-            <ul className="space-y-2 text-sm text-[#F1F5F9]/80">
+          <div className="footerM-section">
+            <h3 className="sectionM-title">Legal</h3>
+            <ul className="sectionM-links">
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a  className="footerM-link">
                   Política de Privacidad
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a  className="footerM-link">
                   Términos de Uso
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#248a98] transition-colors">
+                <a className="footerM-link">
                   Política de Cookies
                 </a>
               </li>
@@ -85,8 +81,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm text-[#F1F5F9]/60">
-          © 2025 TecnoLink. Todos los derechos reservados.
+        <div className="footerM-bottom">
+          <p className="copyrightM">© 2025 TecnoLink. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

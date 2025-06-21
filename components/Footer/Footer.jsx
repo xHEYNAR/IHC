@@ -8,9 +8,9 @@ export default function Footer() {
           <div className="footer-brand">
             <div className="footer-logo">
               <div className="logo-icon">
-                <img src="/logoP.png" alt="Logo" className="logo-image33" />
+                <img src="/logoNN.png" alt="Logo" className="logo-image33" />
               </div>
-              <span className="brand-name">TecnoLink</span>
+              <span className="brand-name22">TecnoLink</span>
             </div>
             <p className="brand-description">
               Ayudamos a estudiantes a encontrar el equipo perfecto para sus estudios.

@@ -41,8 +41,10 @@ export default function Header() {
       </nav>
 
       <div className="flex items-center">
-          <Link href="/carrito"><div className="icon-box"><TiShoppingCart className="logo-user"  color="#1abc9c" /></div></Link>
-          <div className="icon-box"><FaUserCircle className="logo-user"  color="#1abc9c" /></div> 
+
+          <Link href="/carrito"><div className="icon-box"><TiShoppingCart className="logo-user"  color="#10cbb4" /></div></Link>
+          <div className="icon-box5"><FaUserCircle className="logo-user5"  color="#f9fffe" /></div> 
+
         <Button variant="ghost" size="sm" className="menu-button" onClick={toggleMenu}>
           {isMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="menu-btn2" />}
         </Button>
@@ -50,11 +52,7 @@ export default function Header() {
     </div>
 
     {/* Menú móvil */}
-    <div
-      className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-        isMenuOpen ? "max-h-96 opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"
-      }`}
-    >
+      <div className={`menu-mobile-container ${isMenuOpen ? "menu-show" : "menu-hide"}`}>
       <nav className="mobile-nav">
         <div className="space-y-2">
           <a href="/" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
