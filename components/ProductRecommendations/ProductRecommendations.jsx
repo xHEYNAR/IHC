@@ -138,8 +138,13 @@ export default function ProductRecommendations() {
     <section className="products-section">
       <div className="products-container">
         <div className="products-header">
-          <h2 className="products-title">Laptops y PCs <span className="products-title2">recomendadas para ti</span></h2>
-          <p className="products-subtitle">Descubre las mejores ofertas de tu equipo ideal</p>
+          <h2 className="products-title">
+            Laptops y PCs{" "}
+            <span className="products-title2">recomendadas para ti</span>
+          </h2>
+          <p className="products-subtitle">
+            Descubre las mejores ofertas de tu equipo ideal
+          </p>
         </div>
         <div className="products-wrapper">
           <button
@@ -181,7 +186,9 @@ export default function ProductRecommendations() {
 
                   <div className="product-info">
                     <h3 className="product-name">{product.name}</h3>
-                    <div className="product-price-content"><span className="product-price">{product.price}</span></div>
+                    <div className="product-price-content">
+                      <span className="product-price">{product.price}</span>
+                    </div>
                     <div className="product-features">
                       {product.features.map((feature, index) => (
                         <div key={index} className="feature-item">
@@ -207,9 +214,7 @@ export default function ProductRecommendations() {
 
                     <div className="product-buttons">
                       <button className="btn-primary">Ver detalle</button>
-                      <Link href="/vistaComprar">
-                        <button className="btn-secondaryPR">Comprar</button>
-                      </Link>
+                      <button className="btn-secondaryPR">Comprar</button>
                     </div>
                   </div>
                 </div>
