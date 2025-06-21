@@ -1,4 +1,5 @@
 import "./Hero.css"
+import Link from "next/link"
 
 export default function Hero() {
   return (
@@ -12,8 +13,8 @@ export default function Hero() {
               Encuentra las mejores computadoras y laptops para tus necesidades personales, académicas y profesionales.
             </p>
             <div className="hero-buttons">
-              <button className="btn btn-primary">Explorar productos</button>
-              <button className="btn btn-secondary">Usar asistente virtual</button>
+              <Link href="/buscar"><button className="btn btn-primary">Explorar productos</button></Link>
+              <Link href="/asistente"><button className="btn btn-secondary">Usar asistente virtual</button></Link>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
+import Link from "next/link";
 import "../styles/header.css"
 
 export default function Header() {
@@ -26,21 +27,21 @@ export default function Header() {
           <div className="logo-circle">
             <img src="/logoP.png" alt="Logo" className="logo-image" />
           </div>
-          <span className="logo-text22 animate-gradient-text">TecnoLink</span>
+          <Link href="/"><span className="logo-text22 animate-gradient-text">TecnoLink</span></Link>
         </div>
       </div>
 
       {/* Navegación escritorio */}
       <nav className="hidden md:flex space-x-8">
-        <a href="/" className={`nav-link ${pathname === "/" ? "active-nav-link" : ""}`}>Inicio</a>
-        <a href="/buscar" className={`nav-link ${pathname === "/buscar" ? "active-nav-link" : ""}`}>Buscar</a>
-        <a href="/simulador" className={`nav-link ${pathname === "/simulador" ? "active-nav-link" : ""}`}>Simulador</a>
-        <a href="/comparador" className={`nav-link ${pathname === "/comparador" ? "active-nav-link" : ""}`}>Comparador</a>
-        <a href="/resenas" className={`nav-link ${pathname === "/resenas" ? "active-nav-link" : ""}`}>Reseñas</a>
+        <Link href="/"><p className={`nav-link ${pathname === "/" ? "active-nav-link" : ""}`}>Inicio</p></Link>
+        <Link href="/buscar"><p className={`nav-link ${pathname === "/buscar" ? "active-nav-link" : ""}`}>Buscar</p></Link>
+        <Link href="/simulador"><p className={`nav-link ${pathname === "/simulador" ? "active-nav-link" : ""}`}>Simulador</p></Link>
+        <Link href="/comparador"><p className={`nav-link ${pathname === "/comparador" ? "active-nav-link" : ""}`}>Comparador</p></Link>
+        <Link href="/resenas"><p className={`nav-link ${pathname === "/resenas" ? "active-nav-link" : ""}`}>Reseñas</p></Link>
       </nav>
 
       <div className="flex items-center">
-          <div className="icon-box"><TiShoppingCart className="logo-user"  color="#1abc9c" /></div>
+          <Link href="/carrito"><div className="icon-box"><TiShoppingCart className="logo-user"  color="#1abc9c" /></div></Link>
           <div className="icon-box"><FaUserCircle className="logo-user"  color="#1abc9c" /></div> 
         <Button variant="ghost" size="sm" className="menu-button" onClick={toggleMenu}>
           {isMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="menu-btn2" />}
@@ -49,7 +50,11 @@ export default function Header() {
     </div>
 
     {/* Menú móvil */}
-    <div className={`mobile-menu ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+    <div
+      className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+        isMenuOpen ? "max-h-96 opacity-100 pointer-events-auto" : "max-h-0 opacity-0 pointer-events-none"
+      }`}
+    >
       <nav className="mobile-nav">
         <div className="space-y-2">
           <a href="/" className="mobile-link" onClick={() => setIsMenuOpen(false)}>Inicio</a>
