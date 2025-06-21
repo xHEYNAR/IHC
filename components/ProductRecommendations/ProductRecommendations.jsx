@@ -137,8 +137,10 @@ export default function ProductRecommendations() {
   return (
     <section className="products-section">
       <div className="products-container">
-        <h2 className="products-title">Laptops y PCs recomendadas para ti</h2>
-
+        <div className="products-header">
+          <h2 className="products-title">Laptops y PCs <span className="products-title2">recomendadas para ti</span></h2>
+          <p className="products-subtitle">Descubre las mejores ofertas de tu equipo ideal</p>
+        </div>
         <div className="products-wrapper">
           <button
             className="nav-arrow nav-arrow-left"
@@ -154,7 +156,7 @@ export default function ProductRecommendations() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={3}
                 d="M15 19l-7-7 7-7"
               />
             </svg>
@@ -179,8 +181,7 @@ export default function ProductRecommendations() {
 
                   <div className="product-info">
                     <h3 className="product-name">{product.name}</h3>
-                    <p className="product-price">{product.price}</p>
-
+                    <div className="product-price-content"><span className="product-price">{product.price}</span></div>
                     <div className="product-features">
                       {product.features.map((feature, index) => (
                         <div key={index} className="feature-item">
@@ -206,11 +207,7 @@ export default function ProductRecommendations() {
 
                     <div className="product-buttons">
                       <Link href="/vistaComprar">
-                        <button className="btn-primary">Ver detalle</button>
-                      </Link>
-
-                      <Link href="/vistaPagar">
-                        <button className="btn-secondary">Comprar</button>
+                        <button className="btn-secondaryPR">Comprar</button>
                       </Link>
                     </div>
                   </div>
@@ -233,7 +230,7 @@ export default function ProductRecommendations() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={3}
                 d="M9 5l7 7-7 7"
               />
             </svg>
@@ -241,26 +238,6 @@ export default function ProductRecommendations() {
         </div>
 
         <div className="scroll-indicator-wrapper">
-          <button
-            className="scroll-nav-btn scroll-nav-left"
-            onClick={scrollLeft}
-            disabled={scrollPosition <= 0}
-          >
-            <svg
-              className="scroll-nav-icon"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-
           <div className="scroll-indicator" onClick={handleIndicatorClick}>
             <div className="scroll-track">
               <div
@@ -269,26 +246,6 @@ export default function ProductRecommendations() {
               ></div>
             </div>
           </div>
-
-          <button
-            className="scroll-nav-btn scroll-nav-right"
-            onClick={scrollRight}
-            disabled={scrollPosition >= maxScroll}
-          >
-            <svg
-              className="scroll-nav-icon"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

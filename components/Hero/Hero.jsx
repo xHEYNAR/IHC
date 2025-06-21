@@ -13,8 +13,8 @@ export default function Hero() {
               Encuentra las mejores computadoras y laptops para tus necesidades personales, académicas y profesionales.
             </p>
             <div className="hero-buttons">
-              <Link href="/buscar"><button className="btn btn-primary">Explorar productos</button></Link>
-              <Link href="/asistente"><button className="btn btn-secondary">Usar asistente virtual</button></Link>
+              <Link href="/buscar"><button className="btnHero btn-primaryHero">Explorar productos</button></Link>
+              <Link href="/asistente"><button className="btnHero btn-secondaryHero">Usar asistente virtual</button></Link>
             </div>
           </div>
 
@@ -39,8 +39,8 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="floating-element floating-element-1">💻</div>
-            <div className="floating-element floating-element-2">⚡</div>
+            <div className="floating-element floating-element-1Hero">💻</div>
+            <div className="floating-element floating-element-2Hero">⚡</div>
           </div>
         </div>
       </div>
