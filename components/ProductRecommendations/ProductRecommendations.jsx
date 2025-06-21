@@ -205,8 +205,11 @@ export default function ProductRecommendations() {
                     <p className="product-financing">{product.financing}</p>
 
                     <div className="product-buttons">
-                      <button className="btn-primary">Ver detalle</button>
                       <Link href="/vistaComprar">
+                        <button className="btn-primary">Ver detalle</button>
+                      </Link>
+
+                      <Link href="/vistaPagar">
                         <button className="btn-secondary">Comprar</button>
                       </Link>
                     </div>

@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import { CreditCard, Banknote, QrCode } from "lucide-react";
 import SuccedModal from "./succedModal"; // ajusta la ruta si hace falta
 
-import "/styles/vistaPagar.css";
+import "../styles/vistaPagar.css";
 
 export default function VistaPagar() {
   const router = useRouter();

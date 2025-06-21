@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import "/styles/vistaComprar.css";
+import "../styles/vistaComprar.css";
 import { useState } from "react";
 
 export default function VistaComprar() {
@@ -104,7 +105,13 @@ export default function VistaComprar() {
           </ul>
 
           <div className="vc-buttons">
-            <Button className="vc-btn">Agregar al carrito</Button>
+            <Link href="/carrito" passHref>
+              <Button className="vc-btn">
+                <ShoppingCart className="inline-block mr-2 h-5 w-5" />
+                Agregar al carrito
+              </Button>
+            </Link>
+
             <Link href="/vistaPagar" passHref>
               <Button className="vc-btn-buy-now">Comprar ahora</Button>
             </Link>
