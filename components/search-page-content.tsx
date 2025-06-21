@@ -602,6 +602,12 @@ export default function SearchPageContent() {
                             const choice = suggestions[highlightedIndex];
                             setSearchQuery(choice);
                             setSuggestions([]);
+                            if (!clickedSuggestions.includes(choice)) {
+                              setClickedSuggestions((prev) => [
+                                ...prev,
+                                choice,
+                              ]);
+                            }
                             filterProducts(
                               selectedCategory,
                               selectedCareer,
