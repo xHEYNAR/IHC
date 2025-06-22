@@ -4,8 +4,7 @@
 
 - **React**  
 - **Next.js**  
-- **Node.js** (v14+ recomendado)  
-- **npm** (o **yarn**)  
+- **npm** 
 
 ---
 
@@ -13,7 +12,6 @@
 
 Antes de comenzar, asegúrate de tener instalado:
 
-- **Node.js** (https://nodejs.org)  
 - **npm** (se instala junto con Node.js)  
 - **Git**  
 
