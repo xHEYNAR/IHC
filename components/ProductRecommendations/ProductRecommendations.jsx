@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import "./ProductRecommendations.css";
 
 const products = [
@@ -137,10 +138,20 @@ export default function ProductRecommendations() {
   return (
     <section className="products-section">
       <div className="products-container">
-        <div className="products-header">
-          <h2 className="products-title">Laptops y PCs <span className="products-title2">recomendadas para ti</span></h2>
-          <p className="products-subtitle">Descubre las mejores ofertas de tu equipo ideal</p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="products-header"
+        >
+          <h2 className="products-title">
+            Laptops y PCs{" "}
+            <span className="products-title2">recomendadas para ti</span>
+          </h2>
+          <p className="products-subtitle">
+            Descubre las mejores ofertas de tu equipo ideal
+          </p>
+        </motion.div>
         <div className="products-wrapper">
           <button
             className="nav-arrow nav-arrow-left"
@@ -206,10 +217,8 @@ export default function ProductRecommendations() {
                     <p className="product-financing">{product.financing}</p>
 
                     <div className="product-buttons">
-                      <button className="btn-primary">Ver detalle</button>
-                      <Link href="/vistaComprar">
-                        <button className="btn-secondaryPR">Comprar</button>
-                      </Link>
+                      <a href="/vistaComprar"><button className="btn-primary">Ver detalle</button></a>
+                      <a href="/vistaPagar"><button className="btn-secondaryPR">Comprar</button></a>
                     </div>
                   </div>
                 </div>
