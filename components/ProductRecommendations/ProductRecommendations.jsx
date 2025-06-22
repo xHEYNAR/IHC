@@ -192,7 +192,9 @@ export default function ProductRecommendations() {
 
                   <div className="product-info">
                     <h3 className="product-name">{product.name}</h3>
-                    <div className="product-price-content"><span className="product-price">{product.price}</span></div>
+                    <div className="product-price-content">
+                      <span className="product-price">{product.price}</span>
+                    </div>
                     <div className="product-features">
                       {product.features.map((feature, index) => (
                         <div key={index} className="feature-item">

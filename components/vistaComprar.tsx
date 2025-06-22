@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import "/styles/vistaComprar.css";
+import "../styles/vistaComprar.css";
 import { useState } from "react";
 
 export default function VistaComprar() {
@@ -27,8 +27,10 @@ export default function VistaComprar() {
     reviews: 122,
     images: [
       "/image/AZUZ_2022.png",
-      "/image/MacBook11.jpeg",
-      "/image/notebook-xps-15-9530-t-black-gallery-1 (1).avif",
+      "/image/asusus.png",
+      "/image/asus atras.png",
+      "/image/asus lateral.png",
+      "/image/asus arriaba.png",
     ],
     details: {
       Marca: "HP",
@@ -54,17 +56,18 @@ export default function VistaComprar() {
     <div className="vista-comprar">
       <div className="vc-container">
         <div className="vc-images">
-          {/* ---- imagen principal: añado la clase fade cuando isFading=true */}
+          {/* imagen principal */}
           <div className={`vc-main-image ${isFading ? "fade-out" : ""}`}>
             <Image
               src={product.images[selectedImage]}
               alt={product.title}
               fill
+              className="object-contain"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
 
-          {/* ---- miniaturas: llamo a handleThumbClick */}
+          {/* miniaturas */}
           <div className="vc-thumbnails">
             {product.images.map((src, i) => (
               <div
@@ -76,7 +79,8 @@ export default function VistaComprar() {
                   src={src}
                   alt={`${product.title} ${i + 1}`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 20vw"
+                  className="object-contain"
+                  sizes="80px"
                 />
               </div>
             ))}
@@ -104,10 +108,28 @@ export default function VistaComprar() {
           </ul>
 
           <div className="vc-buttons">
-            <Button className="vc-btn">Agregar al carrito</Button>
-            <Link href="/vistaPagar" passHref>
-              <Button className="vc-btn-buy-now">Comprar ahora</Button>
-            </Link>
+            <a
+              href="/carrito"
+              className="vc-btn inline-flex items-center justify-center"
+            >
+              <ShoppingCart className="inline-block mr-2 h-5 w-5" />
+              Agregar al carrito
+            </a>
+
+            <a
+              href="/vistaPagar"
+              className="
+                vc-btn-buy-now 
+                inline-flex items-center justify-center
+                bg-[#712581] hover:bg-[#712581]/90 
+                text-white 
+                py-3 rounded-xl 
+                font-semibold 
+                transition-all duration-300
+              "
+            >
+              Comprar ahora
+            </a>
           </div>
 
           <table className="vc-details">

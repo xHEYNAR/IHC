@@ -18,12 +18,14 @@ export default function VirtualAssistant() {
             <div className="assistant-text">
               <h2 className="assistant-title">¿No sabes por dónde empezar?</h2>
               <p className="assistant-description">
-                Nuestro asistente virtual te guiará paso a paso para encontrar el
-                equipo perfecto según tu carrera y necesidades.
+                Nuestro asistente virtual te guiará paso a paso para encontrar
+                el equipo perfecto según tu carrera y necesidades.
               </p>
               <div className="assistant-buttons">
                 <Link href="/asistente">
-                  <button className="btn-primary">Hablar con el asistente</button>
+                  <button className="btn-primary">
+                    Hablar con el asistente
+                  </button>
                 </Link>
                 <Link href="/buscar">
                   <button className="btn-secondary">Buscar productos</button>

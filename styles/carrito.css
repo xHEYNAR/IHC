@@ -1,0 +1,155 @@
+/* carrito.css */
+
+.cart-container {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 1rem;
+}
+
+.cart-title {
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.cart-empty {
+  text-align: center;
+  color: #6b7280;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cart-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-thumb {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.cart-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qty-btn {
+  background: #f3f4f6;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.qty-btn:hover {
+  background: #e5e7eb;
+}
+
+.qty-value {
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.cart-price,
+.cart-total {
+  color: #374151;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.remove-btn:hover {
+  color: #ef4444;
+}
+
+.remove-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.summary-value {
+  color: #712581;
+}
+
+.checkout-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 2rem;
+  background: #248a98;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+  background: #1f7e85;
+}
+
+@media (max-width: 768px) {
+  .cart-product {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cart-summary {
+    justify-content: space-between;
+  }
+}
+
+/* carrito.css (añade al final) */
+
+.clear-cart-btn {
+  background: #ef4444;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 1rem;
+}
+
+.clear-cart-btn:hover {
+  background: #dc2626;
+}
+.vc-btn svg {
+  margin-right: 0.5rem;
+}
