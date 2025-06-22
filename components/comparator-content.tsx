@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useRef } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -105,6 +106,7 @@ export default function ComparatorContent() {
   const [budgetRange, setBudgetRange] = useState([500, 2327]);
   const [activeCategory, setActiveCategory] = useState("todos");
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+  const comparisonRef = useRef<HTMLDivElement>(null);
 
   // Filtrar productos según presupuesto y categoría
   const getFilteredProducts = () => {
@@ -121,10 +123,25 @@ export default function ComparatorContent() {
   const filteredProducts = getFilteredProducts();
 
   const handleProductSelection = (productId: number) => {
+    let newSelected: number[];
+
     if (selectedProducts.includes(productId)) {
-      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
+      newSelected = selectedProducts.filter((id) => id !== productId);
+      setSelectedProducts(newSelected);
     } else if (selectedProducts.length < 2) {
-      setSelectedProducts([...selectedProducts, productId]);
+      newSelected = [...selectedProducts, productId];
+      setSelectedProducts(newSelected);
+
+      // si acabamos de llegar a 2, hacemos scroll
+      if (newSelected.length === 2) {
+        // damos un pequeño timeout para esperar a que el DOM renderice la sección
+        setTimeout(() => {
+          comparisonRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
     }
   };
 
@@ -683,6 +700,7 @@ export default function ComparatorContent() {
                 type: "spring",
                 stiffness: 100,
               }}
+              ref={comparisonRef}
             >
               <Card className="border-0 shadow-2xl rounded-3xl overflow-hidden hover:shadow-3xl transition-all duration-500">
                 <CardContent className="p-8">
