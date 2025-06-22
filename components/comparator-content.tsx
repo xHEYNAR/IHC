@@ -156,7 +156,7 @@ export default function ComparatorContent() {
   );
 
   return (
-    <div className="bg-[#f2f2f2]">
+    <div className="bg-[#f2f2f2] mt-12">
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0, y: -50 }}

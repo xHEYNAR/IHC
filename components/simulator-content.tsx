@@ -402,7 +402,7 @@ export default function SimulatorContent() {
   };
 
   return (
-    <div className="bg-[#f2f2f2]">
+    <div className="bg-[#f2f2f2] mt-12">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#712581] via-[#712581] to-[#8B2F9B] py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
