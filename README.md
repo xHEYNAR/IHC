@@ -2,7 +2,8 @@
 
 ## 🚀 Tecnologías y herramientas
 
-- **React**  
+- **React**
+- **Node.js**  
 - **Next.js**  
 - **npm** 
 
