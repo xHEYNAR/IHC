@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/reviews-content.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/reviews-content.jsx", "components/simulator-content.jsx", "components/comparator-content.jsx", "components/search-page-content.jsx", "components/virtual-assistant-page-content2.jsx", "components/header.jsx"],
   "exclude": ["node_modules"]
 }

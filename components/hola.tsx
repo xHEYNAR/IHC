@@ -318,7 +318,7 @@ export default function VirtualAssistantPageContent() {
                           </div>
                           <Button
                             size="sm"
-                            className="w-full mt-3 bg-gradient-to-r from-[#10cbb4] to-[#10cbb4] hover:from-[#00ad97] hover:to-[#00ad97] text-white text-xs py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                            className="w-full mt-3 bg-gradient-to-r from-[#712581] to-[#8B2F9B] hover:from-[#8B2F9B] hover:to-[#712581] text-white text-xs py-2 rounded-lg transition-all duration-300 hover:scale-105"
                           >
                             Ver detalles
                           </Button>

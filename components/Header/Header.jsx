@@ -18,7 +18,7 @@ export default function Header() {
             <div className="logo-icon">
               <span className="logo-text">T</span>
             </div>
-            <span className="brand-name">TecnoLink</span>
+            <span className="brand-nameHA">TecnoLink</span>
           </div>
 
           {/* Desktop Navigation */}

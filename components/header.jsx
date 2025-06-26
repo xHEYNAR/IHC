@@ -27,7 +27,7 @@ export default function Header() {
           <div className="logo-circle">
             <img src="/logoP.png" alt="Logo" className="logo-image" />
           </div>
-          <Link href="/"><span className="logo-text22 animate-gradient-text">TecnoLink</span></Link>
+          <Link href="/"><span className="logo-text22 animate-gradient-text22">TecnoLink</span></Link>
         </div>
       </div>
 
