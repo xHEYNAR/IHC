@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "/styles/succedModal.css";
+import "../styles/succedModal.css";
 
 interface SuccedModalProps {
   isOpen: boolean;
@@ -24,16 +24,22 @@ export default function SuccedModal({
       >
         <div className="success-modal__icon">
           <svg
+            className="checkmark"
+            viewBox="0 0 52 52"
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            viewBox="0 0 24 24"
           >
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            <circle
+              className="checkmark__circle"
+              cx="26"
+              cy="26"
+              r="25"
+              fill="none"
+            />
+            <path
+              className="checkmark__check"
+              fill="none"
+              d="M14 27l7 7 16-16"
+            />
           </svg>
         </div>
         <h2 className="success-modal__title">{title}</h2>

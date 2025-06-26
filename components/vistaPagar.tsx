@@ -163,8 +163,8 @@ export default function VistaPagar() {
     if (!postalCode.trim()) newErrors.postalCode = "Debe llenar este campo.";
     if (!addressLine1.trim())
       newErrors.addressLine1 = "Debe llenar este campo.";
-    if (!addressLine2.trim()) newErrors.locality = "";
-    if (!phone.trim()) newErrors.locality = "";
+    // if (!addressLine2.trim()) newErrors.locality = "";
+    // if (!phone.trim()) newErrors.locality = "";
 
     // 2️⃣ —— Letras solo donde corresponde
     const onlyLetters = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/;
@@ -270,7 +270,7 @@ export default function VistaPagar() {
             <form className="vp-form" onSubmit={handleCardPayment}>
               {/* --- Datos de la tarjeta --- */}
               <label>
-                Número de tarjeta
+                Número de tarjeta <span className="required-asterisk">*</span>
                 <input
                   className={errors.cardNumber ? "input-error" : ""}
                   type="text"
@@ -290,7 +290,8 @@ export default function VistaPagar() {
               </label>
               <div className="vp-form-row">
                 <label>
-                  Fecha de caducidad
+                  Fecha de caducidad{" "}
+                  <span className="required-asterisk">*</span>
                   <input
                     className={errors.expiry ? "input-error" : ""}
                     type="text"
@@ -309,7 +310,7 @@ export default function VistaPagar() {
                   )}
                 </label>
                 <label>
-                  CVV
+                  CVV <span className="required-asterisk">*</span>
                   <input
                     className={errors.cvv ? "input-error" : ""}
                     type="text"
@@ -329,7 +330,8 @@ export default function VistaPagar() {
                 </label>
               </div>
               <label>
-                Titular de la tarjeta
+                Titular de la tarjeta{" "}
+                <span className="required-asterisk">*</span>
                 <input
                   className={errors.cardHolder ? "input-error" : ""}
                   type="text"
@@ -353,7 +355,7 @@ export default function VistaPagar() {
               <h3 className="vp-subtitle">Información de facturación</h3>
               <div className="vp-form-row">
                 <label>
-                  Nombre
+                  Nombre <span className="required-asterisk">*</span>
                   <input
                     className={errors.firstName ? "input-error" : ""}
                     type="text"
@@ -369,7 +371,7 @@ export default function VistaPagar() {
                   )}
                 </label>
                 <label>
-                  Apellidos
+                  Apellidos <span className="required-asterisk">*</span>
                   <input
                     className={errors.lastName ? "input-error" : ""}
                     type="text"
@@ -387,7 +389,7 @@ export default function VistaPagar() {
               </div>
               <div className="vp-form-row">
                 <label>
-                  Localidad
+                  Localidad <span className="required-asterisk">*</span>
                   <input
                     className={errors.locality ? "input-error" : ""}
                     type="text"
@@ -404,7 +406,7 @@ export default function VistaPagar() {
                 </label>
 
                 <label>
-                  Código postal
+                  Código postal<span className="required-asterisk">*</span>
                   <input
                     type="text"
                     placeholder="0000"
@@ -422,7 +424,8 @@ export default function VistaPagar() {
                 </label>
               </div>
               <label>
-                Dirección de facturación
+                Dirección de facturación{" "}
+                <span className="required-asterisk">*</span>
                 <input
                   type="text"
                   placeholder="Av. Villazón 1234"

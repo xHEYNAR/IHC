@@ -47,3 +47,59 @@
 .success-modal__button:hover {
   background: #591b65;
 }
+.success-modal__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkmark {
+  width: 72px;
+  height: 72px;
+  stroke: #248a98;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+  animation: scaleCheck 0.3s ease-in-out 0.1s forwards;
+  margin-bottom: 1rem;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+  stroke: #248a98;
+  fill: none;
+  animation: strokeCircle 0.6s ease-out forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: strokeCheck 0.4s ease-out 0.3s forwards;
+  stroke: #248a98;
+  stroke-width: 4;
+}
+
+@keyframes strokeCircle {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strokeCheck {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scaleCheck {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
