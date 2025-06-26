@@ -5,7 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
 import ModalDelete from "@/components/ModalDelete"; // ajusta la ruta si es necesario
+import UndoToast from "./UndoToast";
 import "../styles/carrito.css";
+
+type PendingRemoval = {
+  item: CartItem;
+  index: number; // para restaurar en su sitio
+};
 
 type CartItem = {
   id: number;
@@ -33,6 +39,27 @@ export default function Carrito() {
     },
   ]);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<CartItem | null>(null);
+  const [pending, setPending] = useState<PendingRemoval | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
+
+  const finalizeRemoval = () => {
+    setPending(null); // ahora sí se borra del todo
+    setToastVisible(false);
+  };
+
+  const undoRemove = () => {
+    if (!pending) return;
+    setItems((prev) => {
+      const nuevo = [...prev];
+      nuevo.splice(pending.index, 0, pending.item); // lo recoloca
+      return nuevo;
+    });
+    setPending(null);
+    setToastVisible(false);
+  };
+
   const updateQty = (id: number, delta: number) => {
     setItems((prev) =>
       prev.map((item) =>
@@ -42,12 +69,16 @@ export default function Carrito() {
       )
     );
   };
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState<CartItem | null>(null);
-
   const removeItem = (id: number) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    setItems((prev) => {
+      const idx = prev.findIndex((p) => p.id === id);
+      const removed = prev[idx];
+      // guardamos en “pending” para posible undo
+      setPending({ item: removed, index: idx });
+      setToastVisible(true);
+      // quitamos visualmente el producto
+      return prev.filter((p) => p.id !== id);
+    });
   };
 
   const confirmDelete = () => {
@@ -158,6 +189,12 @@ export default function Carrito() {
           setModalOpen(false);
           setItemToDelete(null);
         }}
+      />
+      <UndoToast
+        visible={toastVisible}
+        productName={pending?.item.name ?? ""}
+        onUndo={undoRemove}
+        onTimeout={finalizeRemoval}
       />
     </div>
   );
