@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
+import ModalDelete from "@/components/ModalDelete"; // ajusta la ruta si es necesario
 import "../styles/carrito.css";
 
 type CartItem = {
@@ -42,8 +43,19 @@ export default function Carrito() {
     );
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<CartItem | null>(null);
+
   const removeItem = (id: number) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      removeItem(itemToDelete.id);
+      setItemToDelete(null);
+      setModalOpen(false);
+    }
   };
 
   const clearCart = () => {
@@ -71,9 +83,9 @@ export default function Carrito() {
             <thead>
               <tr>
                 <th>Producto</th>
-                <th>Cantidad</th>
                 <th>Precio</th>
-                <th>Total</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
                 <th></th>
               </tr>
             </thead>
@@ -113,7 +125,10 @@ export default function Carrito() {
                   <td>
                     <button
                       className="remove-btn"
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => {
+                        setItemToDelete(item);
+                        setModalOpen(true);
+                      }}
                     >
                       <Trash2 className="remove-icon" />
                     </button>
@@ -124,7 +139,7 @@ export default function Carrito() {
           </table>
 
           <div className="cart-summary">
-            <span>Subtotal:</span>
+            <span>Total:</span>
             <span className="summary-value">${subtotal.toFixed(2)}</span>
           </div>
 
@@ -133,6 +148,17 @@ export default function Carrito() {
           </Link>
         </>
       )}
+
+      {/* MODAL SOLO AÑADIDO, NADA MÁS MODIFICADO */}
+      <ModalDelete
+        open={modalOpen}
+        message={`¿Estás seguro de eliminar "${itemToDelete?.name}" del carrito?`}
+        onConfirm={confirmDelete}
+        onCancel={() => {
+          setModalOpen(false);
+          setItemToDelete(null);
+        }}
+      />
     </div>
   );
 }

@@ -1,0 +1,95 @@
+/* Colores principales de TecnoLink */
+:root {
+  --purple-700: #651fb0; /* fondo héroe */
+  --purple-600: #7232c7; /* acento claro */
+  --teal-500: #00c6b4; /* botones primarios */
+  --gray-900: #0f172a; /* texto oscuro */
+  --gray-700: #334155;
+}
+
+/* Fondo semitransparente que oscurece la pantalla */
+.md-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55); /* gris-negro translúcido */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Caja del modal */
+.md-dialog {
+  width: 90%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: show 0.28s ease-out;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título y cuerpo */
+.md-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--purple-700);
+}
+
+.md-message {
+  margin: 0 0 1.75rem;
+  color: var(--gray-700);
+  line-height: 1.45;
+}
+
+/* Botones */
+.md-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.md-btn {
+  min-width: 96px;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Botón “Sí” */
+.md-btn-confirm {
+  background: var(--teal-500);
+  color: #fff;
+}
+
+.md-btn-confirm:hover {
+  background: #00b3a4;
+}
+
+/* Botón “No” */
+.md-btn-cancel {
+  background: #fff;
+  color: var(--purple-700);
+  border-color: var(--purple-700);
+}
+
+.md-btn-cancel:hover {
+  background: var(--purple-700);
+  color: #fff;
+}
